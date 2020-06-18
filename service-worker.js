@@ -15,7 +15,7 @@ importScripts("/paper-desktop/js/workbox-v4.3.1/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/paper-desktop/js/workbox-v4.3.1"});
 
 importScripts(
-  "/paper-desktop/js/precache-manifest.0062cd44095b06c61d35c684e16e01dc.js"
+  "/paper-desktop/js/precache-manifest.8df50e739f2e3642ea8b6d02b78bb868.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "paper-desktop"});

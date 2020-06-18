@@ -1,5 +1,9 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "c242375b0ab360e660bb5b52845c706f",
+    "url": "/paper-desktop/404.html"
+  },
+  {
     "revision": "f130a0b70e386170cf6f011c0ca8c4f4",
     "url": "/paper-desktop/img/icons/android-chrome-192x192.png"
   },
@@ -60,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/paper-desktop/img/icons/safari-pinned-tab.svg"
   },
   {
-    "revision": "bc7470c797a7194c378df2943d1f65e7",
+    "revision": "520848dc53080b0c9c2686aa6c142250",
     "url": "/paper-desktop/index.html"
   },
   {
