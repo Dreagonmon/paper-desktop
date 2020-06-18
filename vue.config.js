@@ -1,7 +1,9 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === "production" ? "/paper-desktop/" : "/",
   css: { extract: false },
   pwa: {
-    themeColor: "#808080",
+    themeColor: "#EFE8CC",
+    msTileColor: "#EFE8CC",
     manifestOptions: {
       display: "fullscreen",
     },
@@ -11,6 +13,13 @@ module.exports = {
       appleTouchIcon: "img/icons/apple-touch-icon-152x152.png",
       maskIcon: "img/icons/safari-pinned-tab.svg",
       msTileImage: "img/icons/msapplication-icon-144x144.png",
+    },
+    workboxPluginMode: "GenerateSW",
+    workboxOptions: {
+      cleanupOutdatedCaches: true,
+      skipWaiting: true,
+      clientsClaim: true,
+      directoryIndex: "index.html",
     },
   },
 };
