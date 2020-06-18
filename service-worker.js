@@ -11,10 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/paper-desktop/js/workbox-v4.3.1/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/paper-desktop/js/workbox-v4.3.1"});
 
 importScripts(
-  "/paper-desktop/precache-manifest.8b8f36e4953cb118aaaf960435e44d5e.js"
+  "/paper-desktop/js/precache-manifest.0062cd44095b06c61d35c684e16e01dc.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "paper-desktop"});
@@ -34,3 +35,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {
 });
 
 workbox.precaching.cleanupOutdatedCaches();
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/"), {
+  
+  blacklist: [/\/api\//],
+});
