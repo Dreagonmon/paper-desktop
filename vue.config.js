@@ -20,6 +20,15 @@ module.exports = {
       skipWaiting: true,
       clientsClaim: true,
       directoryIndex: "index.html",
+      importWorkboxFrom: "local",
+      importsDirectory: "js",
+      navigateFallback: "/",
+      navigateFallbackBlacklist: [/\/api\//],
+      exclude: [
+        /\.map$/,
+        /favicon\.ico$/,
+        /manifest\.json$/,
+      ],
     },
   },
 };
