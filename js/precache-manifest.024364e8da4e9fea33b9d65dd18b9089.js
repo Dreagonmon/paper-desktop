@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "44b51713addd3a2d1510c318096076c5",
+    "revision": "105ebf37f3d96d43c6c55433c32f73c2",
     "url": "/paper-desktop/404.html"
   },
   {
@@ -64,16 +64,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/paper-desktop/img/icons/safari-pinned-tab.svg"
   },
   {
-    "revision": "520848dc53080b0c9c2686aa6c142250",
+    "revision": "0e352f41030d581c13d2a74554fba480",
     "url": "/paper-desktop/index.html"
   },
   {
-    "revision": "73961a5fbbc0880c403c",
-    "url": "/paper-desktop/js/app.1bd82e30.js"
+    "revision": "4646d0ba290c62f25b8e",
+    "url": "/paper-desktop/js/app.e63fa1fe.js"
   },
   {
-    "revision": "8f10d8c7852edf664655",
-    "url": "/paper-desktop/js/chunk-vendors.4a3fdea9.js"
+    "revision": "121250455fcc29c888a1",
+    "url": "/paper-desktop/js/chunk-vendors.b01192d4.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
