@@ -64,12 +64,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/paper-desktop/img/icons/safari-pinned-tab.svg"
   },
   {
-    "revision": "0e352f41030d581c13d2a74554fba480",
+    "revision": "242b5eed154dfd7a16af25ae8940564f",
     "url": "/paper-desktop/index.html"
   },
   {
-    "revision": "4646d0ba290c62f25b8e",
-    "url": "/paper-desktop/js/app.e63fa1fe.js"
+    "revision": "a831524dec416d89bd2f",
+    "url": "/paper-desktop/js/app.d6017747.js"
   },
   {
     "revision": "121250455fcc29c888a1",
