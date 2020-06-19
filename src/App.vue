@@ -1,21 +1,20 @@
 <template>
   <div id="app">
-    <transition>
-      <NeumDiv class="csss" :distance="5" :inset="inset" :backgroundType="0">
-        <NeumDiv :inset="!inset" style="padding:0.5em;">Hello</NeumDiv>
-      </NeumDiv>
-    </transition>
-    <NeumDivButton class="csss" :inset="inset" :backgroundType="0"
-      @click="onClick()">
-        Dragon
-      </NeumDivButton>
+    <NeumDiv id="content" :inset="!inset">
+      <PageCover v-if="!inset" />
+      <PageApps v-if="inset" />
+    </NeumDiv>
+    <NeumButton id="footer" @click="inset=!inset">
+      <span>Show {{inset ? "Cover" : "Apps"}}</span>
+    </NeumButton>
   </div>
 </template>
 
 <script>
-import NeumDiv from "./components/NeumDiv.vue";
-import NeumDivButton from "./components/NeumDivButton.vue";
-
+import NeumDiv from "./components/NeumDiv";
+import NeumButton from "./components/NeumButton";
+import PageCover from "./pages/PageCover";
+import PageApps from "./pages/PageApps";
 export default {
   name: "App",
   data: function () {
@@ -25,7 +24,9 @@ export default {
   },
   components: {
     NeumDiv,
-    NeumDivButton,
+    NeumButton,
+    PageCover,
+    PageApps,
   },
   methods: {
     onClick: function () {
@@ -37,14 +38,41 @@ export default {
 </script>
 
 <style>
-.csss {
-  padding: 1em;
-  width: fit-content;
+* {
+  box-sizing: border-box;
 }
-
+#content {
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  width: calc(100% - 2em);
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  padding: 1em;
+}
+#footer {
+  overflow: hidden;
+  height: 4em;
+  flex: 0 0 auto;
+  width: calc(100% - 2em);
+  margin-block-end: 1em;
+}
+#footer span {
+  font-weight: bolder;
+  font-size: 1.4em;
+  color: rgba(0,0,0,0.2);
+}
 #app {
   text-align: center;
-  padding: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 1em; */
 }
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;

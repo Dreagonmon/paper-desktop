@@ -5,6 +5,9 @@ const props = {
   element: {
     require: true,
   },
+  name: {
+    default: undefined,
+  },
   radius: {
     default: Theme.NEUM_RADIUS,
   },
@@ -41,12 +44,13 @@ const boxStyle = function (props) {
       break;
   }
   return {
-    "--neum-radius": props.radius,
     "--neum-shadow-light": getLightBoxShadow(props.color, props.distance, props.intensity, props.direction),
     "--neum-shadow-dark": getDarkBoxShadow(props.color, props.distance, props.intensity, props.direction),
     "--neum-shadow-light-zero": getLightBoxShadow(props.color, 0, props.intensity, props.direction),
     "--neum-shadow-dark-zero": getDarkBoxShadow(props.color, 0, props.intensity, props.direction),
     "--neum-background": background,
+    "--neum-radius": props.radius,
+    "--neum-color": props.color,
   };
 };
 export default {
@@ -54,10 +58,13 @@ export default {
   props: props,
   functional: true,
   render: function (createElement, context) {
+    const tail = typeof (context.props.name) === "string" && context.props.name !== ""
+      ? context.props.name
+      : context.props.element;
     const data = {
       ...context.data,
       style: boxStyle(context.props),
-      class: context.props.inset ? [`neum-box-${context.props.element}`, "inset"] : [`neum-box-${context.props.element}`],
+      class: context.props.inset ? [`neum-box-${tail}`, "inset"] : [`neum-box-${tail}`],
     };
     return createElement(context.props.element, data, context.children);
   },

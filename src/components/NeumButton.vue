@@ -1,7 +1,7 @@
 <script>
 import NeumElement from "./NeumElement";
 export default {
-  name: "NeumDiv",
+  name: "NeumButton",
   components: {
     NeumElement,
   },
