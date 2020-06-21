@@ -1,9 +1,11 @@
 "use strict";
 // global class
 class ApplicationInfo {
-  name = "";
-  package = "";
-  activity = "";
+  constructor () {
+    this.name = "";
+    this.package = "";
+    this.activity = "";
+  }
 }
 class LauncherResponseError extends Error {
   constructor (msg) {
@@ -13,7 +15,6 @@ class LauncherResponseError extends Error {
 
 // fake server
 class Random {
-  seed;
   constructor (seed = Math.PI * Math.PI) {
     this.seed = seed;
   };
@@ -36,18 +37,18 @@ const COLOR_LIST = [
   "#009688", "#4caf50", "#8bc34a", "#cddc39", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722",
   // "#795548", "#9e9e9e", "#9e9e9e",
 ];
-const getRandomWord = (random) => {
+const getRandomWord = function (random) {
   const pos = random.nextInt(0, WORD_LIST.length);
   return WORD_LIST[pos];
 };
-const getRandomColor = (random) => {
+const getRandomColor = function (random) {
   const pos = random.nextInt(0, COLOR_LIST.length);
   return COLOR_LIST[pos];
 };
-const toFirstUpperCase = (text) => {
+const toFirstUpperCase = function (text) {
   return text.replace(/^./u, text.charAt(0).toUpperCase());
 };
-const generateRandomAppList = (seed = Math.PI * Math.PI, size = 50) => {
+const generateRandomAppList = function (seed = Math.PI * Math.PI, size = 50) {
   const apps = [];
   const colors = {};
   const r = new Random(seed);
@@ -70,12 +71,15 @@ const generateRandomAppList = (seed = Math.PI * Math.PI, size = 50) => {
 };
 const [APP_LIST, APP_THEME] = generateRandomAppList();
 class MockServer {
-  permission = {}; // permission only request once
-  hasLaunchPermission = () => {
+  constructor () {
+    this.permission = {}; // permission only request once
+  }
+
+  hasLaunchPermission () {
     return !!this.permission.launcher;
   };
 
-  getApplicationList = async () => {
+  async getApplicationList () {
     if (!this.hasLaunchPermission()) {
       console.error("launchApplication: You need request permission first!");
       return Promise.reject(new LauncherResponseError("No Permission"));
@@ -83,7 +87,7 @@ class MockServer {
     return APP_LIST;
   };
 
-  getApplicationIconSrc = (packageName, activity, size = ICON_SIZE) => {
+  getApplicationIconSrc (packageName, activity, size = ICON_SIZE) {
     let theme;
     if (packageName != null) {
       theme = APP_THEME[packageName];
@@ -104,7 +108,7 @@ class MockServer {
     return "data:image/svg+xml;base64," + btoa(SVG_IMAGE);
   };
 
-  launchApplication = async (packageName, activity) => {
+  async launchApplication (packageName, activity) {
     if (!this.hasLaunchPermission()) {
       console.error("launchApplication: You need request permission first!");
       return Promise.reject(new LauncherResponseError("No Permission"));
@@ -121,7 +125,7 @@ class MockServer {
     frame.style.textAlign = "center";
     frame.style.padding = "1em";
     frame.style.boxSizing = "border-box";
-    frame.onclick = (event) => {
+    frame.onclick = function (event) {
       event.preventDefault();
       event.stopPropagation();
       document.body.removeChild(frame);
@@ -145,7 +149,7 @@ class MockServer {
     return true;
   };
 
-  requestPermission = async (name) => {
+  async requestPermission (name) {
     const NAME_MAP = {
       launcher: "Launcher",
     };
@@ -167,8 +171,8 @@ class MockServer {
 
 // launcher api
 class Launcher {
-  PERMISSION_LAUNCHER = "launcher";
   constructor (port = -1) {
+    this.PERMISSION_LAUNCHER = "launcher";
     if (port < 0) {
       // try to get the port
       try {
@@ -193,7 +197,7 @@ class Launcher {
     this.address = `${protocol}//127.0.0.1:${port}/api/`;
   };
 
-  getApplicationList = async () => {
+  async getApplicationList () {
     if (this.server) {
       return await this.server.getApplicationList();
     }
@@ -213,14 +217,14 @@ class Launcher {
     return appList;
   };
 
-  getApplicationIconSrc = (packageName, activity, size = 128) => {
+  getApplicationIconSrc (packageName, activity, size = 128) {
     if (this.server) {
       return this.server.getApplicationIconSrc(packageName, activity, size);
     }
     return `${this.address}icon?package=${packageName}&activity=${activity}&size=${size}&t=${new Date().getTime()}`;
   };
 
-  launchApplication = async (packageName, activity) => {
+  async launchApplication (packageName, activity) {
     if (this.server) {
       return await this.server.launchApplication(packageName, activity);
     }
@@ -232,7 +236,7 @@ class Launcher {
     return true;
   };
 
-  requestPermission = async (name) => {
+  async requestPermission (name) {
     if (this.server) {
       return await this.server.requestPermission(name);
     }
@@ -244,13 +248,10 @@ class Launcher {
     return true;
   };
 
-  startDebugSession = () => {
+  startDebugSession () {
     this.server = new MockServer();
   };
 };
 
-// export
-// window['Launcher'] = Launcher;
-// window['ApplicationInfo'] = ApplicationInfo;
-// window['LauncherResponseError'] = LauncherResponseError;
-export { Launcher, ApplicationInfo, LauncherResponseError };
+const launcher = new Launcher();
+export { launcher, Launcher, ApplicationInfo, LauncherResponseError };

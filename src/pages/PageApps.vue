@@ -16,9 +16,8 @@
 <script>
 import NeumDiv from "../components/NeumDiv";
 import NeumText from "../components/NeumText";
-import { Launcher } from "../utils/launcher";
-const api = new Launcher();
-// api.startDebugSession();
+import { launcher } from "android-web-launcher";
+launcher.startDebugSession();
 export default {
   name: "PageApps",
   components: {
@@ -32,15 +31,15 @@ export default {
   },
   methods: {
     getIconSrc: function (packageName, activity) {
-      return api.getApplicationIconSrc(packageName, activity, 128);
+      return launcher.getApplicationIconSrc(packageName, activity, 128);
     },
     launch: async function (packageName, activity) {
-      await api.launchApplication(packageName, activity);
+      await launcher.launchApplication(packageName, activity);
     },
   },
   mounted: async function () {
-    await api.requestPermission("launcher");
-    this.apps = await api.getApplicationList();
+    await launcher.requestPermission("launcher");
+    this.apps = await launcher.getApplicationList();
     console.log(this.apps);
   },
 };
