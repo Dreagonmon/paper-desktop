@@ -17,7 +17,7 @@
 import NeumDiv from "../components/NeumDiv";
 import NeumText from "../components/NeumText";
 import { launcher } from "android-web-launcher";
-launcher.startDebugSession();
+// launcher.startDebugSession();
 export default {
   name: "PageApps",
   components: {
